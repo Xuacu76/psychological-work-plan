@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychological Work Plan</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font Configuration -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            white-space: nowrap; /* Prevents text from wrapping */
+        }
+        .nav-button:not([disabled]):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .page-content {
+            /* Initial styles for hidden, animated pages */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: none; /* Default hidden state, overwritten by JS/inline style */
+        }
+        .page-content.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block; /* Show active page */
+        }
+        .quiz-option {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #e0f2fe; /* blue-100 */
+        }
+        .selected-correct {
+            background-color: #dcfce7 !important; /* green-100 */
+            border-color: #10b981 !important; /* green-500 */
+        }
+        .selected-incorrect {
+            background-color: #fee2e2 !important; /* red-100 */
+            border-color: #ef4444 !important; /* red-500 */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="appContainer" class="w-full max-w-5xl bg-white shadow-2xl rounded-xl p-8 md:p-12 space-y-8">
+
+        <!-- Main Header and Program Title -->
+        <header class="text-center border-b pb-6 border-indigo-100">
+            <h1 class="text-4xl font-extrabold text-indigo-700 tracking-tight">
+                Psychological Work Plan
+            </h1>
+            <p id="pageSubtitle" class="mt-2 text-xl text-gray-500">
+                Phase 1: Organization and Motivation
+            </p>
+            <div id="copyMessage" class="mt-4 p-3 bg-green-100 text-green-700 rounded-lg font-semibold hidden" role="alert">
+                Report copied to clipboard!
+            </div>
+            <div id="resetMessage" class="mt-4 p-3 bg-red-100 text-red-700 rounded-lg font-semibold hidden" role="alert">
+                Program reset. All entered information has been cleared.
+            </div>
+        </header>
+
+        <!-- Page Navigation -->
+        <nav class="flex justify-center space-x-1 md:space-x-3 overflow-x-auto pb-2">
+            <button id="nav-1" data-page="1" class="nav-button px-3 py-2 text-xs md:text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-lg">
+                1. Introduction
+            </button>
+            <button id="nav-2" data-page="2" class="nav-button px-3 py-2 text-xs md:text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                2. Costs & Benefits
+            </button>
+            <button id="nav-3" data-page="3" class="nav-button px-3 py-2 text-xs md:text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                3. Goal Setting
+            </button>
+            <button id="nav-4" data-page="4" class="nav-button px-3 py-2 text-xs md:text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                4. Weekly Plan
+            </button>
+            <button id="nav-5" data-page="5" class="nav-button px-3 py-2 text-xs md:text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                5. Mental Quiz
+            </button>
+            <button id="nav-6" data-page="6" class="nav-button px-3 py-2 text-xs md:text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                6. Confidence Diary
+            </button>
+             <button id="nav-7" data-page="7" class="nav-button px-3 py-2 text-xs md:text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                7. Summary
+            </button>
+        </nav>
+
+        <!-- PAGE CONTENT -->
+
+        <!-- PAGE 1: Introduction (English - New Content) -->
+        <div id="page-1" class="page-content">
+            <section class="mt-8 space-y-6 text-gray-700 leading-relaxed">
+                <h2 class="text-3xl font-extrabold text-indigo-800 border-b pb-3 text-center">
+                    The Importance of an Organized Work Plan
+                </h2>
+
+                <div class="bg-indigo-50 p-6 rounded-lg border-l-4 border-indigo-500 shadow-inner">
+                    <p class="text-lg">
+                        This program is designed to transform your ambitions into concrete actions. In high-performance sports, the difference between talent and sustained success lies in **organization and planning**. A plan isn't just a to-do list; it's a **roadmap** that eliminates uncertainty and focuses your energy.
+                    </p>
+                </div>
+
+                <h2 class="text-2xl font-bold text-indigo-800 border-b pb-2 pt-4">
+                    Planning as a Driver for Motivation
+                </h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-xl">
+                    <p class="text-lg">
+                        Motivation, often seen as a feeling that just arrives, is actually a direct result of effective planning. When you have a plan:
+                    </p>
+
+                    <ul class="list-disc pl-8 mt-3 space-y-3">
+                        <li class="text-lg">
+                            <strong class="text-indigo-800">Clarity on the Path:</strong> You know exactly what step to take today, eliminating analysis paralysis. Every action feels **intentional**.
+                        </li>
+                        <li class="text-lg">
+                            <strong class="text-indigo-800">Measurable Progress:</strong> By completing daily or weekly tasks, you see progress tangibly. This evidence of advancement (momentum) is the **most potent fuel** for your motivation.
+                        </li>
+                         <li class="text-lg">
+                            <strong class="text-indigo-800">Reduced Anxiety:</strong> The plan transforms large, seemingly unattainable goals into small, manageable tasks. This reduces pressure and allows you to focus on the present.
+                        </li>
+                    </ul>
+                    <p class="mt-5 text-lg font-semibold text-indigo-600">
+                        The goal is to structure your work so that every day is a small success that brings you closer to your long-term goals, keeping your motivation constant and robust.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 2: Costs and Benefits (English - MODIFIED) -->
+        <div id="page-2" class="page-content">
+            <section class="mt-8 space-y-6 text-gray-700 leading-relaxed">
+                <h2 class="text-3xl font-bold text-indigo-800 border-b pb-3">
+                    2. Decision Analysis: Costs vs. Benefits
+                </h2>
+
+                <!-- Definition of Costs and Benefits (Unchanged) -->
+                <div class="bg-indigo-50 p-6 rounded-lg border-l-4 border-indigo-500 shadow-inner">
+                    <p class="text-xl font-semibold text-indigo-700 mb-3">
+                        Key Definitions
+                    </p>
+                    <p class="text-lg mb-4">
+                        <strong class="text-indigo-800">Benefits:</strong> These are the positive gains, favorable outcomes, and rewards you get from following a course of action, both immediate (short-term) and future (long-term).
+                    </p>
+                    <p class="text-lg">
+                        <strong class="text-indigo-800">Costs:</strong> These are the sacrifices, efforts, losses, or negative consequences (physical, emotional, time) associated with a decision. They can be immediate or manifest much later.
+                    </p>
+                </div>
+
+                <p class="text-lg">
+                    In your athletic career, every action you take (or fail to take) has its own balance of costs and benefits. It's crucial to see the difference between the **effort of today** and the **reward of tomorrow**.
+                </p>
+
+                <h3 class="text-2xl font-bold text-indigo-800 border-b pb-2 pt-4">
+                    The Impact Table: Choose Your Path
+                </h3>
+
+                <!-- Consequence Table (MODIFIED) -->
+                <div class="overflow-x-auto shadow-xl rounded-lg border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-indigo-600 text-white">
+                            <tr>
+                                <th class="px-3 py-3 text-left text-sm font-bold uppercase tracking-wider w-1/4">
+                                    Work Plan Approach
+                                </th>
+                                <th class="px-3 py-3 text-left text-sm font-bold uppercase tracking-wider w-1/4">
+                                    Short-Term Impact
+                                </th>
+                                <th class="px-3 py-3 text-left text-sm font-bold uppercase tracking-wider w-1/4">
+                                    Medium-Term Impact
+                                </th>
+                                <th class="px-3 py-3 text-left text-sm font-bold uppercase tracking-wider w-1/4">
+                                    Long-Term Impact
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- SCENARIO 1: Ideal -->
+                            <tr class="hover:bg-green-50 transition duration-150">
+                                <td class="px-3 py-4 text-lg font-bold text-green-700">
+                                    1. Disciplined & Consistent Plan
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    <strong>Cost:</strong> Daily effort, fatigue, time management. <br><strong>Benefit:</strong> Daily sense of accomplishment, high energy.
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    Measurable skill improvement, increased fitness, high trust from coaches, hitting performance targets.
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    Achievement of major goals, peak performance, high resilience, professional success.
+                                </td>
+                            </tr>
+                            <!-- SCENARIO 2: Medium -->
+                            <tr class="hover:bg-yellow-50 transition duration-150">
+                                <td class="px-3 py-4 text-lg font-bold text-yellow-700">
+                                    2. Irregular / Incomplete Plan
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    <strong>Cost:</strong> Guilt, frustration, slow progress. <br><strong>Benefit:</strong> More free time, less immediate effort.
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    Stagnation, performance plateaus, loss of confidence, falling behind peers, inconsistent results.
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    Missed opportunities, unreached potential, chronic "what if" regrets, high anxiety in competition.
+                                </td>
+                            </tr>
+                            <!-- SCENARIO 3: Worst -->
+                            <tr class="hover:bg-red-50 transition duration-150">
+                                <td class="px-3 py-4 text-lg font-bold text-red-700">
+                                    3. Ignoring the Plan
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    <strong>Cost:</strong> High anxiety, confusion, no direction. <br><strong>Benefit:</strong> Total freedom, zero effort.
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    Rapid skill decline, loss of fitness, potential deselection or removal from the team.
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-800">
+                                    Failure to achieve goals, career stagnation or end, significant long-term regret.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 bg-indigo-100 p-6 rounded-lg border-l-4 border-indigo-600">
+                    <p class="text-xl italic text-indigo-900">
+                        The daily 'costs' of discipline are small investments that pay massive long-term dividends. The short-term 'benefits' of avoidance lead to significant long-term costs.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 3: GOAL SETTING (English - Unchanged) -->
+        <div id="page-3" class="page-content">
+            <section class="mt-8 space-y-8 text-gray-700 leading-relaxed">
+                <h2 class="text-3xl font-extrabold text-indigo-800 border-b pb-3 text-center">
+                    3. GOAL SETTING AS PREPARATION FOR RETURN TO PLAY
+                </h2>
+
+                <p class="text-lg text-center text-gray-600">
+                    Define your goals to maintain motivation and structure your path back. Outcome Goals are the final targets; Performance Goals are the concrete steps you will take.
+                </p>
+
+                <!-- 6 Goals Container: Responsive Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Goal 1: Outcome - Long Term -->
+                    <div class="bg-blue-50 p-5 rounded-xl shadow-lg border-t-4 border-blue-600 space-y-2">
+                        <p class="text-xl font-bold text-blue-800">OUTCOME GOAL</p>
+                        <p class="text-lg font-semibold text-gray-600">LONG TERM</p>
+                        <p class="text-sm font-medium text-gray-500">Estimated DATE:</p>
+                        <input id="goal-1-date" type="date" class="w-full p-2 border border-blue-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <textarea id="goal-1-text" rows="3" placeholder="Write your goal here..." class="w-full p-3 border border-blue-300 rounded-lg mt-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+
+                    <!-- Goal 2: Outcome - Medium Term -->
+                    <div class="bg-blue-50 p-5 rounded-xl shadow-lg border-t-4 border-blue-600 space-y-2">
+                        <p class="text-xl font-bold text-blue-800">OUTCOME GOAL</p>
+                        <p class="text-lg font-semibold text-gray-600">MEDIUM TERM</p>
+                        <p class="text-sm font-medium text-gray-500">Estimated DATE:</p>
+                        <input id="goal-2-date" type="date" class="w-full p-2 border border-blue-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <textarea id="goal-2-text" rows="3" placeholder="Write your goal here..." class="w-full p-3 border border-blue-300 rounded-lg mt-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+
+                    <!-- Goal 3: Outcome - Short Term -->
+                    <div class="bg-blue-50 p-5 rounded-xl shadow-lg border-t-4 border-blue-600 space-y-2">
+                        <p class="text-xl font-bold text-blue-800">OUTCOME GOAL</p>
+                        <p class="text-lg font-semibold text-gray-600">SHORT TERM</p>
+                        <p class="text-sm font-medium text-gray-500">Estimated DATE:</p>
+                        <input id="goal-3-date" type="date" class="w-full p-2 border border-blue-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <textarea id="goal-3-text" rows="3" placeholder="Write your goal here..." class="w-full p-3 border border-blue-300 rounded-lg mt-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+
+                    <!-- Visual separator -->
+                    <div class="lg:col-span-3 h-px bg-gray-200 my-2"></div>
+
+                    <!-- Goal 4: Performance 1 -->
+                    <div class="bg-green-50 p-5 rounded-xl shadow-lg border-t-4 border-green-600 space-y-2">
+                        <p class="text-xl font-bold text-green-800">1st PERFORMANCE GOAL</p>
+                        <p class="text-sm font-medium text-gray-500">Target DATE:</p>
+                        <input id="goal-4-date" type="date" class="w-full p-2 border border-green-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+                        <textarea id="goal-4-text" rows="3" placeholder="Write your goal here..." class="w-full p-3 border border-green-300 rounded-lg mt-2 focus:ring-green-500 focus:border-green-500"></textarea>
+                    </div>
+
+                    <!-- Goal 5: Performance 2 -->
+                    <div class="bg-green-50 p-5 rounded-xl shadow-lg border-t-4 border-green-600 space-y-2">
+                        <p class="text-xl font-bold text-green-800">2nd PERFORMANCE GOAL</p>
+                        <p class="text-sm font-medium text-gray-500">Target DATE:</p>
+                        <input id="goal-5-date" type="date" class="w-full p-2 border border-green-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+                        <textarea id="goal-5-text" rows="3" placeholder="Write your goal here..." class="w-full p-3 border border-green-300 rounded-lg mt-2 focus:ring-green-500 focus:border-green-500"></textarea>
+                    </div>
+
+                    <!-- Goal 6: Performance 3 -->
+                    <div class="bg-green-50 p-5 rounded-xl shadow-lg border-t-4 border-green-600 space-y-2">
+                        <p class="text-xl font-bold text-green-800">3rd PERFORMANCE GOAL</p>
+                        <p class="text-sm font-medium text-gray-500">Target DATE:</p>
+                        <input id="goal-6-date" type="date" class="w-full p-2 border border-green-300 rounded-lg focus:ring-green-500 focus:border-green-500">
+                        <textarea id="goal-6-text" rows="3" placeholder="Write your goal here..." class="w-full p-3 border border-green-300 rounded-lg mt-2 focus:ring-green-500 focus:border-green-500"></textarea>
+                    </div>
+
+                </div>
+
+            </section>
+        </div>
+
+        <!-- PAGE 4: WEEKLY WORK PLAN (English - MODIFIED) -->
+        <div id="page-4" class="page-content">
+            <section class="mt-8 space-y-8 text-gray-700 leading-relaxed">
+                <h2 class="text-3xl font-extrabold text-indigo-800 border-b pb-3 text-center">
+                    4. WEEKLY WORK PLAN: WHAT YOU WILL DO
+                </h2>
+
+                <p class="text-lg text-center text-gray-600">
+                    Detail the daily activities for **physical training, golf training, mental training, and personal growth**, ensuring they align with your performance goals.
+                </p>
+
+                <!-- Weekly Plan Container: Responsive Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                    <!-- Monday -->
+                    <div class="bg-gray-100 p-4 rounded-xl shadow-lg border-l-4 border-indigo-500 space-y-2">
+                        <p class="text-lg font-bold text-indigo-800">PLAN: MONDAY</p>
+                        <p class="text-sm font-medium text-gray-500">DATE:</p>
+                        <input id="day-1-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <textarea id="day-1-text" rows="4" placeholder="Gym/Conditioning, Range practice, Visualization..." class="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+
+                    <!-- Tuesday -->
+                    <div class="bg-gray-100 p-4 rounded-xl shadow-lg border-l-4 border-indigo-500 space-y-2">
+                        <p class="text-lg font-bold text-indigo-800">PLAN: TUESDAY</p>
+                        <p class="text-sm font-medium text-gray-500">DATE:</p>
+                        <input id="day-2-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <textarea id="day-2-text" rows="4" placeholder="Gym/Conditioning, Range practice, Visualization..." class="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+
+                    <!-- Wednesday -->
+                    <div class="bg-gray-100 p-4 rounded-xl shadow-lg border-l-4 border-indigo-500 space-y-2">
+                        <p class="text-lg font-bold text-indigo-800">PLAN: WEDNESDAY</p>
+                        <p class="text-sm font-medium text-gray-500">DATE:</p>
+                        <input id="day-3-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <textarea id="day-3-text" rows="4" placeholder="Gym/Conditioning, Range practice, Visualization..." class="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+
+                    <!-- Thursday -->
+                    <div class="bg-gray-100 p-4 rounded-xl shadow-lg border-l-4 border-indigo-500 space-y-2">
+                        <p class="text-lg font-bold text-indigo-800">PLAN: THURSDAY</p>
+                        <p class="text-sm font-medium text-gray-500">DATE:</p>
+                        <input id="day-4-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <textarea id="day-4-text" rows="4" placeholder="Gym/Conditioning, Range practice, Visualization..." class="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+                    
+                    <!-- Friday -->
+                    <div class="bg-gray-100 p-4 rounded-xl shadow-lg border-l-4 border-indigo-500 space-y-2">
+                        <p class="text-lg font-bold text-indigo-800">PLAN: FRIDAY</p>
+                        <p class="text-sm font-medium text-gray-500">DATE:</p>
+                        <input id="day-5-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <textarea id="day-5-text" rows="4" placeholder="Gym/Conditioning, Range practice, Visualization..." class="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+
+                    <!-- Saturday -->
+                    <div class="bg-gray-100 p-4 rounded-xl shadow-lg border-l-4 border-indigo-500 space-y-2">
+                        <p class="text-lg font-bold text-indigo-800">PLAN: SATURDAY</p>
+                        <p class="text-sm font-medium text-gray-500">DATE:</p>
+                        <input id="day-6-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <textarea id="day-6-text" rows="4" placeholder="Golf course play, Active rest or mental focus..." class="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+
+                    <!-- Sunday -->
+                    <div class="bg-gray-100 p-4 rounded-xl shadow-lg border-l-4 border-indigo-500 space-y-2">
+                        <p class="text-lg font-bold text-indigo-800">PLAN: SUNDAY</p>
+                        <p class="text-sm font-medium text-gray-500">DATE:</p>
+                        <input id="day-7-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <textarea id="day-7-text" rows="4" placeholder="Weekly review, planning for next week, Personal growth..." class="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+
+                </div>
+
+            </section>
+        </div>
+
+        <!-- PAGE 5: INTERACTIVE QUIZ (English - Renumbered) -->
+        <div id="page-5" class="page-content">
+            <section class="mt-8 space-y-8 text-gray-700 leading-relaxed">
+                <h2 class="text-3xl font-extrabold text-indigo-800 border-b pb-3 text-center">
+                    5. INTERACTIVE PSYCHOLOGICAL REINFORCEMENT: TEST YOUR MIND!
+                </h2>
+
+                <p class="text-lg text-center text-gray-600">
+                    Answer these didactic questions on **Discipline, Process Focus, and Growth**. You will receive an immediate explanation to reinforce your learning.
+                </p>
+
+                <!-- Quiz Container -->
+                <div id="quizContainer" class="space-y-6">
+                    <!-- Questions will be injected here by JavaScript -->
+                </div>
+                
+                <div class="flex justify-center pt-4">
+                    <button id="nextQuestionButton" class="px-8 py-3 text-lg font-bold text-white bg-indigo-500 rounded-xl shadow-lg hover:bg-indigo-600 transition duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-300" style="display: none;">
+                        Next Question →
+                    </button>
+                    <p id="quizFinishedMessage" class="text-xl font-bold text-green-700 p-3" style="display: none;">
+                        Quiz completed! Excellent work!
+                    </p>
+                </div>
+
+            </section>
+        </div>
+        <!-- END PAGE 5 -->
+        
+        <!-- PAGE 6: CONFIDENCE DIARY (NEW - NOW IN ENGLISH) -->
+        <div id="page-6" class="page-content">
+            <section class="mt-8 space-y-8 text-gray-700 leading-relaxed">
+                <h2 class="text-3xl font-extrabold text-indigo-800 border-b pb-3 text-center">
+                    6. CONFIDENCE DIARY: CONSOLIDATE YOUR LEARNING
+                </h2>
+
+                <p class="text-lg text-center text-gray-600">
+                    Complete this diary at the end of each training session. Reflection is the key to progress and confidence.
+                </p>
+
+                <!-- Diary Container: Single column layout for each day -->
+                <div class="grid grid-cols-1 gap-6">
+
+                    <!-- Days 1-7 (Monday to Sunday) -->
+                    <template id="diary-template">
+                        <!-- Content will be generated by JS -->
+                    </template>
+                    
+                    <!-- Inject the 7 days -->
+                    <div id="diaryContainer" class="space-y-6">
+                        <!-- JS will populate this -->
+                    </div>
+
+                </div>
+            </section>
+        </div>
+        <!-- END PAGE 6 -->
+
+        <!-- PAGE 7: SUMMARY REPORT (Old Page 6) -->
+        <div id="page-7" class="page-content">
+            <section class="mt-8 space-y-8 text-gray-700 leading-relaxed">
+                <h2 class="text-3xl font-extrabold text-indigo-800 border-b pb-3 text-center">
+                    7. PROGRAM SUMMARY REPORT
+                </h2>
+                
+                <p class="text-lg text-center text-gray-600">
+                    Review your progress below. Click the 'Copy Report' button to easily send this summary to your coach or trainer.
+                </p>
+
+                <div id="summaryContent" class="bg-gray-50 p-6 rounded-xl shadow-inner border border-gray-200">
+                    <!-- Summary content generated by JavaScript -->
+                    <p class="text-center text-gray-500 italic">Click 'Next Step' to generate the report.</p>
+                </div>
+
+                <div class="flex justify-center pt-4">
+                    <button id="copyReportButton" onclick="copySummary()" class="px-8 py-3 text-lg font-bold text-white bg-green-500 rounded-xl shadow-lg hover:bg-green-600 transition duration-300 focus:outline-none focus:ring-4 focus:ring-green-300">
+                        Copy Report
+                    </button>
+                </div>
+
+            </section>
+        </div>
+        <!-- END PAGE 7 -->
+
+
+        <!-- Bottom Navigation and Utility Buttons -->
+        <div class="flex flex-col sm:flex-row justify-between items-center mt-10 pt-6 border-t border-indigo-100 space-y-4 sm:space-y-0">
+            <!-- Reset Button (Left) -->
+            <button id="resetButton" class="px-6 py-3 text-lg font-bold text-red-600 bg-red-100 rounded-xl shadow-md hover:bg-red-200 transition duration-300 focus:outline-none focus:ring-4 focus:ring-red-300 w-full sm:w-auto">
+                Reset Program
+            </button>
+
+            <!-- Navigation Buttons (Center) -->
+            <div class="flex space-x-4">
+                <button id="prevPageButton" class="px-6 py-3 text-lg font-bold text-gray-600 bg-gray-200 rounded-xl shadow-md hover:bg-gray-300 transition duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300" disabled>
+                    ← Previous
+                </button>
+                <button id="nextPageButton" class="px-6 py-3 text-lg font-bold text-white bg-indigo-500 rounded-xl shadow-lg hover:bg-indigo-600 transition duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-300">
+                    Next Step →
+                </button>
+            </div>
+            
+            <!-- Removed Save Button as requested -->
+        </div>
+
+    </div>
+
+    <script>
+        // Page Navigation Logic in JavaScript
+        const pages = [
+            { id: 'page-1', subtitle: 'Phase 1: Organization and Motivation' },
+            { id: 'page-2', subtitle: 'Decision Analysis: Costs vs. Benefits' },
+            { id: 'page-3', subtitle: 'Planning: Goals for Return to Play' },
+            { id: 'page-4', subtitle: 'Execution: Weekly Work Plan' },
+            { id: 'page-5', subtitle: 'Interactive Psychological Reinforcement (Quiz)' },
+            { id: 'page-6', subtitle: 'Psychological Integration: Confidence Diary' }, // NEW Diary Page 6
+            { id: 'page-7', subtitle: 'Program Summary and Shareable Report' }, // Summary Page 7
+        ];
+
+        let currentPage = 1;
+        let quizAnswers = []; // Stores { question, selectedText, isCorrect } for the summary
+
+        const prevButton = document.getElementById('prevPageButton');
+        const nextButton = document.getElementById('nextPageButton');
+        const resetButton = document.getElementById('resetButton');
+        const subtitleElement = document.getElementById('pageSubtitle');
+        const navButtons = document.querySelectorAll('.nav-button');
+        const allContentPages = document.querySelectorAll('.page-content');
+        const copyMessage = document.getElementById('copyMessage');
+        const resetMessage = document.getElementById('resetMessage');
+        const summaryContentDiv = document.getElementById('summaryContent');
+        
+        // --- Quiz Data (Page 5) ---
+        const quizData = [
+            // Discipline / Process Focus (MODIFIED by user request)
+            {
+                question: "Which habit best supports achieving your Performance Goals (daily process goals)?",
+                options: [
+                    { text: "Only focusing on the end result (e.g., winning the next tournament).", isCorrect: false, explanation: "Focusing only on the outcome creates anxiety and ignores the controllable steps. Performance Goals focus on the daily actions that lead to the outcome." },
+                    // NEW CORRECT OPTION (User's request incorporated)
+                    { text: "Clearly defining the daily training focus and always setting a specific objective for every session.", isCorrect: true, explanation: "Correct! Setting a clear, intentional daily objective reduces psychological clutter and anxiety (by reducing ambiguity). This action creates a concrete, immediate measure of success, which builds confidence and reinforces that you are in control of your development." },
+                    { text: "Waiting until you feel highly motivated before starting your daily training session.", isCorrect: false, explanation: "High performance relies on discipline and routine, not motivation. Waiting for motivation leads to inconsistency (Scenario 2 in Costs/Benefits)." },
+                    { text: "Trying to complete your entire Weekly Plan perfectly in just three days.", isCorrect: false, explanation: "Consistency over intensity. Overloading the start risks burnout or injury. The weekly plan requires sustained, balanced effort." }
+                ],
+                topic: "Discipline and Process"
+            },
+            // Growth Mindset / Feedback
+            {
+                question: "When reviewing your weekly progress, how should you best analyze a bad training day or a missed target?",
+                options: [
+                    { text: "By criticizing yourself harshly to ensure you perform better next week.", isCorrect: false, explanation: "Self-criticism demotivates. A 'growth mindset' focuses on learning. Harsh criticism rarely leads to sustainable improvement." },
+                    { text: "By focusing on what was learned and identifying a specific, actionable adjustment for the next week's plan.", isCorrect: true, explanation: "Correct! Failure is information. A growth mindset turns setbacks into data points, leading to specific, small adjustments for continuous improvement. This is key to long-term growth." },
+                    { text: "By immediately abandoning the goal because it seems too difficult to achieve.", isCorrect: false, explanation: "This response is a symptom of a fixed mindset. Successful athletes are resilient and view challenges as opportunities to push boundaries, not stop points." },
+                    { text: "Blaming external factors (e.g., weather, equipment, other people) for the lack of progress.", isCorrect: false, explanation: "Blaming external factors removes your control over the situation. Focus on what is within your sphere of influence to make effective changes." }
+                ],
+                topic: "Growth Mindset and Feedback"
+            },
+            // Planning for Athletic Identity
+            {
+                question: "What is the primary benefit of dividing your long-term Outcome Goal into specific Short-Term Performance Goals?",
+                options: [
+                    { text: "It allows you to skip mental training because your physical goals are clear.", isCorrect: false, explanation: "Mental training is essential for high performance and should never be skipped. Goals must integrate physical, technical, and mental aspects." },
+                    { text: "It transforms an overwhelming future goal into manageable, motivating steps that you can control and measure daily.", isCorrect: true, explanation: "Correct! Breaking down a large goal makes it less intimidating and provides daily wins (momentum). Control over the process is the foundation of confidence." },
+                    { text: "It prevents your coach from changing your plan mid-season.", isCorrect: false, explanation: "The plan must be flexible and adapt to reality. Goal setting is about personal clarity, not managerial control." },
+                    { text: "It makes the long-term goal seem further away, reducing pressure.", isCorrect: false, explanation: "While it manages pressure, the goal of breaking it down is to make the process clearer and the path to achievement more tangible, not just to move the finish line." }
+                ],
+                topic: "Goal Setting Strategy"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        const quizContainer = document.getElementById('quizContainer');
+        const nextQuestionButton = document.getElementById('nextQuestionButton');
+        const quizFinishedMessage = document.getElementById('quizFinishedMessage');
+
+        function renderQuestion(index) {
+            quizContainer.innerHTML = '';
+            quizFinishedMessage.style.display = 'none';
+            nextQuestionButton.style.display = 'none';
+
+            if (index >= quizData.length) {
+                quizFinishedMessage.style.display = 'block';
+                return;
+            }
+
+            const data = quizData[index];
+
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'bg-white p-6 rounded-xl shadow-xl border-t-4 border-indigo-500 space-y-4';
+            questionDiv.innerHTML = `
+                <p class="text-sm font-semibold text-indigo-500 uppercase">${data.topic}</p>
+                <h3 class="text-xl font-bold text-gray-800">${index + 1}. ${data.question}</h3>
+                <div id="optionsContainer-${index}" class="space-y-3">
+                    <!-- Options injected here -->
+                </div>
+                <div id="explanation-${index}" class="mt-4 p-4 rounded-lg bg-green-50 border border-green-300 text-sm text-gray-700 font-medium hidden">
+                    <!-- Explanation displayed here -->
+                </div>
+            `;
+            quizContainer.appendChild(questionDiv);
+
+            const optionsContainer = document.getElementById(`optionsContainer-${index}`);
+            const explanationDiv = document.getElementById(`explanation-${index}`);
+            
+            data.options.forEach((option, optionIndex) => {
+                const optionButton = document.createElement('button');
+                optionButton.className = 'quiz-option w-full text-left p-3 border border-gray-300 rounded-lg text-lg text-gray-800 focus:outline-none';
+                optionButton.textContent = option.text;
+                // Store the full option object for easy retrieval
+                optionButton.dataset.optionData = JSON.stringify({
+                    text: option.text,
+                    isCorrect: option.isCorrect,
+                    question: data.question
+                });
+                
+                optionButton.addEventListener('click', () => handleAnswer(optionButton, index, option));
+                optionsContainer.appendChild(optionButton);
+            });
+            
+            // Check if the question was already answered and highlight it
+            const storedAnswer = quizAnswers.find(a => a.question === data.question);
+            if (storedAnswer) {
+                const selectedOptionButton = Array.from(optionsContainer.children).find(btn => btn.textContent === storedAnswer.selectedText);
+                if (selectedOptionButton) {
+                    // Replay the handleAnswer logic visually
+                    const options = optionsContainer.querySelectorAll('.quiz-option');
+                    options.forEach(btn => {
+                        btn.disabled = true;
+                        const optionData = JSON.parse(btn.dataset.optionData);
+                        if (optionData.isCorrect) {
+                            btn.classList.add('selected-correct', 'font-bold');
+                            if (btn !== selectedOptionButton) {
+                                btn.classList.add('opacity-70');
+                            }
+                        } else if (btn === selectedOptionButton) {
+                            btn.classList.add('selected-incorrect');
+                        }
+                    });
+                    
+                    // Show the explanation of the selected option
+                    const selectedExplanation = data.options.find(o => o.text === storedAnswer.selectedText).explanation;
+                    explanationDiv.innerHTML = `<span class="font-extrabold text-green-700">Answer:</span> ${selectedExplanation}`;
+                    explanationDiv.style.display = 'block';
+                    
+                    if (index < quizData.length - 1) {
+                         nextQuestionButton.textContent = 'Next Question →';
+                         nextQuestionButton.style.display = 'block';
+                    } else {
+                         quizFinishedMessage.style.display = 'block';
+                    }
+                }
+            }
+
+        }
+
+        function handleAnswer(selectedButton, questionIndex, selectedOption) {
+            // Disable all option buttons for this question
+            const options = document.getElementById(`optionsContainer-${questionIndex}`).querySelectorAll('.quiz-option');
+            options.forEach(btn => btn.disabled = true);
+
+            const explanationDiv = document.getElementById(`explanation-${questionIndex}`);
+            
+            // Store the answer
+            const answerIndex = quizAnswers.findIndex(a => a.question === quizData[questionIndex].question);
+            const newAnswer = {
+                question: quizData[questionIndex].question,
+                selectedText: selectedOption.text,
+                isCorrect: selectedOption.isCorrect
+            };
+
+            if (answerIndex === -1) {
+                quizAnswers.push(newAnswer);
+            } else {
+                quizAnswers[answerIndex] = newAnswer;
+            }
+            
+            // Determine if correct and apply styles
+            if (selectedOption.isCorrect) {
+                selectedButton.classList.add('selected-correct', 'font-bold');
+            } else {
+                selectedButton.classList.add('selected-incorrect');
+                // Highlight the correct answer
+                options.forEach(btn => {
+                    const optionData = JSON.parse(btn.dataset.optionData);
+                    if (optionData.isCorrect) {
+                        btn.classList.add('selected-correct', 'font-bold', 'opacity-70');
+                    }
+                });
+            }
+
+            // Show the explanation
+            explanationDiv.innerHTML = `
+                <span class="font-extrabold text-green-700">Answer:</span> ${selectedOption.explanation}
+            `;
+            explanationDiv.style.display = 'block';
+            explanationDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Show the Next Question button
+            if (questionIndex < quizData.length - 1) {
+                nextQuestionButton.textContent = 'Next Question →';
+                nextQuestionButton.style.display = 'block';
+            } else {
+                // It's the last question
+                nextQuestionButton.style.display = 'none';
+                quizFinishedMessage.style.display = 'block';
+            }
+        }
+
+        nextQuestionButton.addEventListener('click', () => {
+            currentQuestionIndex++;
+            updatePage(currentPage); // Re-render the quiz page for the next question
+        });
+
+        // --- Diary Logic (Page 6) ---
+        const diaryContainer = document.getElementById('diaryContainer');
+        const diaryDayLabels = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]; // TRANSLATED
+        
+        function renderDiary() {
+            if (diaryContainer.children.length > 0) return; // Only render once
+
+            diaryDayLabels.forEach((day, index) => {
+                const dayIndex = index + 1;
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 space-y-4';
+                dayDiv.innerHTML = `
+                    <h3 class="text-xl font-bold text-indigo-800">${dayIndex}. ${day}</h3>
+                    
+                    <div class="space-y-3">
+                        <label for="diary-day-${dayIndex}-control" class="block text-lg font-semibold text-gray-700">What did I control well? (Focus & Strengths)</label>
+                        <textarea id="diary-day-${dayIndex}-control" rows="2" placeholder="Ex: My warm-up routine was perfect, I controlled my frustration after a bad shot..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label for="diary-day-${dayIndex}-learned" class="block text-lg font-semibold text-gray-700">What did I learn? (Learning & Growth)</label>
+                        <textarea id="diary-day-${dayIndex}-learned" rows="2" placeholder="Ex: I learned that by breathing before a putt, my pulse stabilizes. This is my new tool." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label for="diary-day-${dayIndex}-different" class="block text-lg font-semibold text-gray-700">What will I do differently the next time I train this performance objective? (Future Action)</label>
+                        <textarea id="diary-day-${dayIndex}-different" rows="2" placeholder="Ex: Next time, I will include 10 more minutes of dynamic stretching to prevent swing stiffness." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                    </div>
+                `;
+                diaryContainer.appendChild(dayDiv);
+            });
+        }
+        
+        // --- Data Collection and Summary Logic (Page 7) ---
+
+        function collectData() {
+            const data = {};
+
+            // 1. Collect Goals (Page 3)
+            data.goals = [];
+            const goalLabels = ["Long Term Outcome Goal", "Medium Term Outcome Goal", "Short Term Outcome Goal", 
+                                "1st Performance Goal", "2nd Performance Goal", "3rd Performance Goal"];
+            for (let i = 1; i <= 6; i++) {
+                const text = document.getElementById(`goal-${i}-text`).value.trim();
+                const date = document.getElementById(`goal-${i}-date`).value;
+                if (text || date) {
+                    data.goals.push({
+                        label: goalLabels[i - 1],
+                        text: text,
+                        date: date
+                    });
+                }
+            }
+
+            // 2. Collect Weekly Plan (Page 4)
+            data.weeklyPlan = [];
+            const dayLabels = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"];
+            for (let i = 1; i <= 7; i++) {
+                const text = document.getElementById(`day-${i}-text`).value.trim();
+                const date = document.getElementById(`day-${i}-date`).value;
+                if (text || date) {
+                    data.weeklyPlan.push({
+                        day: dayLabels[i - 1],
+                        date: date,
+                        plan: text
+                    });
+                }
+            }
+
+            // 3. Collect Quiz Answers
+            data.quizResults = quizAnswers;
+            
+            // 4. Collect Confidence Diary (Page 6)
+            data.confidenceDiary = [];
+            diaryDayLabels.forEach((day, index) => {
+                const dayIndex = index + 1;
+                const control = document.getElementById(`diary-day-${dayIndex}-control`).value.trim();
+                const learned = document.getElementById(`diary-day-${dayIndex}-learned`).value.trim();
+                const different = document.getElementById(`diary-day-${dayIndex}-different`).value.trim();
+
+                if (control || learned || different) {
+                    data.confidenceDiary.push({
+                        day: day,
+                        control: control,
+                        learned: learned,
+                        different: different
+                    });
+                }
+            });
+            
+            return data;
+        }
+        
+        function renderSummary() {
+            const data = collectData();
+            let html = '';
+            let textReport = "--- PSYCHOLOGICAL WORK PLAN REPORT ---\n\n";
+
+            // --- GOALS SUMMARY ---
+            if (data.goals.length > 0) {
+                html += '<h3 class="text-xl font-bold text-indigo-700 mb-3 border-b pb-1">3. Goal Setting Summary</h3>';
+                textReport += "3. GOAL SETTING SUMMARY\n";
+                data.goals.forEach(g => {
+                    const dateText = g.date ? ` (Target: ${g.date})` : '';
+                    const goalText = g.text || "N/A (Goal not set)";
+                    html += `<p class="ml-2 mt-1"><strong class="text-indigo-900">${g.label}:</strong> ${goalText}${dateText}</p>`;
+                    textReport += `- ${g.label}${dateText}: ${goalText}\n`;
+                });
+                html += '<div class="h-px bg-gray-200 my-4"></div>';
+                textReport += "\n";
+            } else {
+                 html += '<p class="text-red-600 font-semibold mb-4">Goal Setting (Page 3) has not been completed.</p>';
+            }
+
+            // --- WEEKLY PLAN SUMMARY ---
+            if (data.weeklyPlan.length > 0) {
+                html += '<h3 class="text-xl font-bold text-indigo-700 mb-3 border-b pb-1">4. Weekly Plan Summary</h3>';
+                textReport += "4. WEEKLY PLAN SUMMARY\n";
+                data.weeklyPlan.forEach(p => {
+                    const dateText = p.date ? ` (${p.date})` : '';
+                    const planText = p.plan || "N/A (No plan written)";
+                    html += `<p class="ml-2 mt-1"><strong class="text-indigo-900">${p.day}${dateText}:</strong> ${planText}</p>`;
+                    textReport += `- ${p.day}${dateText}: ${planText}\n`;
+                });
+                html += '<div class="h-px bg-gray-200 my-4"></div>';
+                textReport += "\n";
+            } else {
+                 html += '<p class="text-red-600 font-semibold mb-4">Weekly Plan (Page 4) has not been completed.</p>';
+            }
+
+            // --- QUIZ RESULTS SUMMARY (ENHANCED) ---
+            if (data.quizResults.length > 0) {
+                html += '<h3 class="text-xl font-bold text-indigo-700 mb-3 border-b pb-1">5. Mental Quiz Results</h3>';
+                textReport += "5. MENTAL QUIZ RESULTS\n";
+                let correctCount = 0;
+                data.quizResults.forEach((r, index) => {
+                    const resultStyle = r.isCorrect ? 'text-green-600' : 'text-red-600';
+                    const resultText = r.isCorrect ? 'CORRECT' : 'INCORRECT';
+                    if (r.isCorrect) correctCount++;
+                    
+                    html += `<p class="ml-2 mt-2"><strong>Q${index + 1}.</strong> ${r.question}</p>`;
+                    html += `<p class="ml-4 italic ${resultStyle}">Selected: ${r.selectedText} (${resultText})</p>`;
+                    textReport += `Q${index + 1}. ${r.question}\nSelected: ${r.selectedText} (${resultText})\n`;
+                    
+                    // Logic: Provide correction if answer was incorrect
+                    if (!r.isCorrect) {
+                        // Find the original question data from the source
+                        const originalQuestion = quizData.find(q => q.question === r.question);
+                        if (originalQuestion) {
+                            // Find the correct option
+                            const correctAnswer = originalQuestion.options.find(o => o.isCorrect);
+                            
+                            if (correctAnswer) {
+                                // Add correction to HTML
+                                html += `<div class="ml-4 mt-1 p-3 bg-yellow-100 rounded-lg border border-yellow-300 text-sm">`;
+                                html += `<p class="font-bold text-yellow-800">Correct Answer:</p>`;
+                                html += `<p class="mt-1">${correctAnswer.text}</p>`;
+                                html += `<p class="mt-2 font-bold text-gray-800">Explanation:</p>`;
+                                html += `<p>${correctAnswer.explanation}</p>`;
+                                html += `</div>`;
+
+                                // Add correction to plain text report
+                                textReport += `CORRECT ANSWER: ${correctAnswer.text}\n`;
+                                textReport += `EXPLANATION: ${correctAnswer.explanation}\n`;
+                            }
+                        }
+                    }
+                });
+                
+                html += `<p class="mt-4 text-lg font-bold">Total Correct Answers: ${correctCount} / ${quizData.length}</p>`;
+                textReport += `\nTotal Correct Answers: ${correctCount} / ${quizData.length}\n`;
+                html += '<div class="h-px bg-gray-200 my-4"></div>';
+                textReport += "\n";
+
+            } else {
+                 html += '<p class="text-red-600 font-semibold mb-4">Mental Quiz (Page 5) has not been completed.</p>';
+            }
+            
+            // --- CONFIDENCE DIARY SUMMARY ---
+            if (data.confidenceDiary.length > 0) {
+                html += '<h3 class="text-xl font-bold text-indigo-700 mb-3 border-b pb-1">6. Confidence Diary Reflections</h3>';
+                textReport += "6. CONFIDENCE DIARY REFLECTIONS\n";
+                data.confidenceDiary.forEach(d => {
+                    html += `<div class="ml-2 mt-3 p-4 bg-indigo-50 rounded-lg border border-indigo-200">`;
+                    html += `<strong class="text-indigo-900">${d.day}:</strong>`;
+                    // Labels are now hardcoded in JS for the summary
+                    html += `<p class="text-sm mt-1 ml-2"><strong>What did I control well?:</strong> ${d.control || 'N/A'}</p>`;
+                    html += `<p class="text-sm ml-2"><strong>What did I learn?:</strong> ${d.learned || 'N/A'}</p>`;
+                    html += `<p class="text-sm ml-2"><strong>What will I do differently?:</strong> ${d.different || 'N/A'}</p>`;
+                    html += `</div>`;
+                    
+                    textReport += `\n--- ${d.day} ---\n`;
+                    textReport += `What did I control well?: ${d.control || 'N/A'}\n`;
+                    textReport += `What did I learn?: ${d.learned || 'N/A'}\n`;
+                    textReport += `What will I do differently?: ${d.different || 'N/A'}\n`;
+                });
+            } else {
+                 html += '<p class="text-red-600 font-semibold mb-4">Confidence Diary (Page 6) has not been completed.</p>';
+            }
+
+            // If no data, show a default message
+            if (data.goals.length === 0 && data.weeklyPlan.length === 0 && data.quizResults.length === 0 && data.confidenceDiary.length === 0) {
+                 html = '<p class="text-center text-xl font-semibold text-gray-700 p-8">No data has been entered yet. Please fill out the goal setting, weekly plan, mental quiz, and confidence diary pages to generate a summary.</p>';
+            }
+            
+            summaryContentDiv.innerHTML = html;
+            // Store the plain text report in the button for copying
+            document.getElementById('copyReportButton').dataset.reportText = textReport;
+        }
+
+        async function copySummary() {
+            let reportText = document.getElementById('copyReportButton').dataset.reportText;
+            
+            // Re-render summary to ensure data is fresh, as dataset might be stale
+            renderSummary();
+            reportText = document.getElementById('copyReportButton').dataset.reportText;
+
+            if (!reportText || reportText.trim().length < 100) {
+                 copyMessage.textContent = "Error: Report content is empty. Please fill out the forms and try again.";
+                 copyMessage.classList.remove('bg-green-100', 'text-green-700');
+                 copyMessage.classList.add('bg-red-100', 'text-red-700');
+                 copyMessage.style.display = 'block';
+                 setTimeout(() => {
+                     copyMessage.style.display = 'none';
+                     copyMessage.classList.add('bg-green-100', 'text-green-700');
+                     copyMessage.classList.remove('bg-red-100', 'text-red-700');
+                     copyMessage.textContent = "Report copied to clipboard!";
+                 }, 4000);
+                 return;
+            }
+
+            try {
+                // 1. Use modern Clipboard API (navigator.clipboard)
+                await navigator.clipboard.writeText(reportText);
+
+                copyMessage.textContent = "Report copied to clipboard!";
+                copyMessage.style.display = 'block';
+                setTimeout(() => copyMessage.style.display = 'none', 3000);
+
+            } catch (err) {
+                // 2. Fallback using execCommand (needed in certain iframe environments)
+                console.warn('Clipboard API failed, falling back to execCommand.', err);
+                const textArea = document.createElement("textarea");
+                textArea.value = reportText;
+                
+                // Make the text area invisible and not interfere with the page layout
+                textArea.style.position = "fixed";
+                textArea.style.top = "0";
+                textArea.style.left = "0";
+                textArea.style.width = "1px";
+                textArea.style.height = "1px";
+                textArea.style.padding = "0";
+                textArea.style.border = "none";
+                textArea.style.outline = "none";
+                textArea.style.boxShadow = "none";
+                textArea.style.background = "transparent";
+
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        copyMessage.textContent = "Report copied to clipboard! (Fallback)";
+                        copyMessage.style.display = 'block';
+                        setTimeout(() => copyMessage.style.display = 'none', 3000);
+                    } else {
+                        throw new Error("execCommand failed.");
+                    }
+                } catch (err2) {
+                    console.error('Final copy fallback failed:', err2);
+                    copyMessage.textContent = "Error: Could not copy report. Please copy the text manually.";
+                    copyMessage.classList.remove('bg-green-100', 'text-green-700');
+                    copyMessage.classList.add('bg-red-100', 'text-red-700');
+                    setTimeout(() => {
+                        copyMessage.style.display = 'none';
+                        copyMessage.classList.add('bg-green-100', 'text-green-700');
+                        copyMessage.classList.remove('bg-red-100', 'text-red-700');
+                    }, 4000);
+                } finally {
+                    document.body.removeChild(textArea);
+                }
+            }
+        }
+
+        // Make copySummary globally accessible (needed because it's called via inline onclick)
+        window.copySummary = copySummary;
+
+        // --- Utility Functions ---
+
+        function resetProgram() {
+            // 1. Reset all form inputs (date and textarea)
+            document.querySelectorAll('input[type="date"], textarea').forEach(input => input.value = '');
+
+            // 2. Reset quiz state
+            currentQuestionIndex = 0;
+            quizAnswers = []; // Clear stored answers
+            
+            if (currentPage === 5) { 
+                renderQuestion(currentQuestionIndex);
+            }
+            
+            // 3. Reset all quiz buttons/styles across the app
+            document.querySelectorAll('.quiz-option').forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('selected-correct', 'selected-incorrect', 'font-bold', 'opacity-70');
+            });
+            document.querySelectorAll('[id^="explanation-"]').forEach(div => div.style.display = 'none');
+            
+            // 4. Navigate to Page 1
+            updatePage(1);
+
+            // 5. Show reset message
+            resetMessage.style.display = 'block';
+            copyMessage.style.display = 'none';
+            setTimeout(() => resetMessage.style.display = 'none', 3000);
+        }
+
+        // --- Navigation Logic ---
+
+        function updatePage(newPage) {
+            // Ensure page number is within limits
+            if (newPage < 1 || newPage > pages.length) return;
+
+            // Update page number
+            currentPage = newPage;
+            const targetPageId = pages[currentPage - 1].id;
+
+            // Manage visibility: Hide all except the target page
+            allContentPages.forEach(content => {
+                if (content.id === targetPageId) {
+                    content.style.display = 'block';
+                    // Wait a tiny bit to apply the active class for smooth transition
+                    setTimeout(() => {
+                        content.classList.add('active');
+                    }, 10);
+                } else {
+                    content.classList.remove('active');
+                    content.style.display = 'none';
+                }
+            });
+
+            // ** Conditional Page Actions **
+            if (currentPage === 5) { // Quiz page
+                renderQuestion(currentQuestionIndex);
+            } else if (currentPage === 6) { // Diary page
+                renderDiary();
+            } else if (currentPage === 7) { // Summary page
+                renderSummary(); // Generate summary when reaching the final page
+            } else {
+                // Reset quiz pointer if we navigate away from the quiz page
+                currentQuestionIndex = 0;
+            }
+
+            // Update subtitle
+            subtitleElement.textContent = pages[currentPage - 1].subtitle;
+
+            // Update navigation buttons
+            navButtons.forEach(btn => {
+                const pageNum = parseInt(btn.dataset.page);
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-lg');
+                btn.classList.add('bg-gray-200', 'text-gray-600', 'hover:bg-gray-300');
+                btn.disabled = false;
+                
+                if (pageNum > pages.length) {
+                     btn.disabled = true;
+                     btn.classList.remove('hover:bg-gray-300');
+                     btn.classList.add('cursor-not-allowed');
+                } else {
+                     btn.classList.remove('cursor-not-allowed');
+                }
+
+                if (pageNum === currentPage) {
+                    btn.classList.add('bg-indigo-600', 'text-white', 'shadow-lg');
+                    btn.classList.remove('bg-gray-200', 'text-gray-600', 'hover:bg-gray-300');
+                }
+            });
+
+            // Control next/previous buttons
+            prevButton.disabled = currentPage === 1;
+            nextButton.disabled = currentPage === pages.length;
+
+            prevButton.classList.toggle('bg-gray-500', prevButton.disabled);
+            prevButton.classList.toggle('bg-gray-200', !prevButton.disabled);
+            prevButton.classList.toggle('hover:bg-gray-300', !prevButton.disabled);
+
+
+            if (nextButton.disabled) {
+                nextButton.textContent = 'Program Completed!';
+                nextButton.classList.remove('bg-indigo-500', 'hover:bg-indigo-600');
+                nextButton.classList.add('bg-gray-400');
+            } else {
+                nextButton.textContent = 'Next Step →';
+                nextButton.classList.remove('bg-gray-400');
+                nextButton.classList.add('bg-indigo-500', 'hover:bg-indigo-600');
+            }
+        }
+
+        // Event Listeners
+        nextButton.addEventListener('click', () => updatePage(currentPage + 1));
+        prevButton.addEventListener('click', () => updatePage(currentPage - 1));
+        resetButton.addEventListener('click', resetProgram);
+
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const page = parseInt(e.target.dataset.page);
+                updatePage(page);
+            });
+     
+</body>
+</   });
+
+        // Initialize on load (Immediate call since script is at the bottom)
+        updatePage(1); 
+    </script>
+html>
