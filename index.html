@@ -116,7 +116,7 @@
                 </div>
 
                 <h2 class="text-2xl font-bold text-indigo-800 border-b pb-2 pt-4">
-                    Planning as a Driver for Motivation
+                    Planning as a Driver for Motivation and Confidence
                 </h2>
 
                 <div class="bg-white p-6 rounded-lg shadow-xl">
@@ -134,9 +134,12 @@
                          <li class="text-lg">
                             <strong class="text-indigo-800">Reduced Anxiety:</strong> The plan transforms large, seemingly unattainable goals into small, manageable tasks. This reduces pressure and allows you to focus on the present.
                         </li>
+                         <li class="text-lg">
+                            <strong class="text-indigo-800">Confidence is Built:</strong> Confidence isn't something you wait for; it's something you **earn**. It means believing you can handle a tough situation because you have carefully planned and practiced. Your plan gives you solid proof that you've done the work, so when it's time to compete, you **know** you are ready.
+                        </li>
                     </ul>
                     <p class="mt-5 text-lg font-semibold text-indigo-600">
-                        The goal is to structure your work so that every day is a small success that brings you closer to your long-term goals, keeping your motivation constant and robust.
+                        The goal is to structure your work so that every day is a small success that brings you closer to your long-term goals, keeping your motivation constant, robust, **and building unshakable confidence**.
                     </p>
                 </div>
             </section>
@@ -302,7 +305,7 @@
                     <!-- Goal 5: Performance 2 -->
                     <div class="bg-green-50 p-5 rounded-xl shadow-lg border-t-4 border-green-600 space-y-2">
                         <p class="text-xl font-bold text-green-800">2nd PERFORMANCE GOAL</p>
-                        <p class="text-sm font-medium text-gray-500">Target DATE:</p>
+                        <p class="text-lg font-medium text-gray-500">Target DATE:</p>
                         <input id="goal-5-date" type="date" class="w-full p-2 border border-green-300 rounded-lg focus:ring-green-500 focus:border-green-500">
                         <textarea id="goal-5-text" rows="3" placeholder="Write your goal here..." class="w-full p-3 border border-green-300 rounded-lg mt-2 focus:ring-green-500 focus:border-green-500"></textarea>
                     </div>
@@ -736,6 +739,18 @@
                         <label for="diary-day-${dayIndex}-different" class="block text-lg font-semibold text-gray-700">What will I do differently the next time I train this performance objective? (Future Action)</label>
                         <textarea id="diary-day-${dayIndex}-different" rows="2" placeholder="Ex: Next time, I will include 10 more minutes of dynamic stretching to prevent swing stiffness." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"></textarea>
                     </div>
+                    
+                    <!-- NEW FIELD: Positive Thoughts -->
+                    <div class="space-y-3">
+                        <label for="diary-day-${dayIndex}-positive" class="block text-lg font-semibold text-gray-700">Positive Thoughts (Reinforcement)</label>
+                        <textarea id="diary-day-${dayIndex}-positive" rows="2" placeholder="Ex: My effort today was 100%. I am getting closer to my goal." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-green-50"></textarea>
+                    </div>
+
+                    <!-- NEW FIELD: Negative Thoughts -->
+                    <div class="space-y-3">
+                        <label for="diary-day-${dayIndex}-negative" class="block text-lg font-semibold text-gray-700">Negative Thoughts (Identify & Address)</label>
+                        <textarea id="diary-day-${dayIndex}-negative" rows="2" placeholder="Ex: I felt frustrated and thought, 'I'm not good enough.' (Write down the thought, not the feeling.)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-red-50"></textarea>
+                    </div>
                 `;
                 diaryContainer.appendChild(dayDiv);
             });
@@ -787,13 +802,17 @@
                 const control = document.getElementById(`diary-day-${dayIndex}-control`).value.trim();
                 const learned = document.getElementById(`diary-day-${dayIndex}-learned`).value.trim();
                 const different = document.getElementById(`diary-day-${dayIndex}-different`).value.trim();
+                const positive = document.getElementById(`diary-day-${dayIndex}-positive`).value.trim(); // NEW
+                const negative = document.getElementById(`diary-day-${dayIndex}-negative`).value.trim(); // NEW
 
-                if (control || learned || different) {
+                if (control || learned || different || positive || negative) {
                     data.confidenceDiary.push({
                         day: day,
                         control: control,
                         learned: learned,
-                        different: different
+                        different: different,
+                        positive: positive, // NEW
+                        negative: negative // NEW
                     });
                 }
             });
@@ -893,16 +912,21 @@
                 data.confidenceDiary.forEach(d => {
                     html += `<div class="ml-2 mt-3 p-4 bg-indigo-50 rounded-lg border border-indigo-200">`;
                     html += `<strong class="text-indigo-900">${d.day}:</strong>`;
-                    // Labels are now hardcoded in JS for the summary
+                    // Existing labels
                     html += `<p class="text-sm mt-1 ml-2"><strong>What did I control well?:</strong> ${d.control || 'N/A'}</p>`;
                     html += `<p class="text-sm ml-2"><strong>What did I learn?:</strong> ${d.learned || 'N/A'}</p>`;
                     html += `<p class="text-sm ml-2"><strong>What will I do differently?:</strong> ${d.different || 'N/A'}</p>`;
+                    // NEW labels
+                    html += `<p class="text-sm ml-2 font-bold text-green-700">Positive Thoughts:</p><p class="text-sm ml-4">${d.positive || 'N/A'}</p>`;
+                    html += `<p class="text-sm ml-2 font-bold text-red-700">Negative Thoughts:</p><p class="text-sm ml-4">${d.negative || 'N/A'}</p>`;
                     html += `</div>`;
                     
                     textReport += `\n--- ${d.day} ---\n`;
                     textReport += `What did I control well?: ${d.control || 'N/A'}\n`;
                     textReport += `What did I learn?: ${d.learned || 'N/A'}\n`;
                     textReport += `What will I do differently?: ${d.different || 'N/A'}\n`;
+                    textReport += `Positive Thoughts: ${d.positive || 'N/A'}\n`; // NEW
+                    textReport += `Negative Thoughts: ${d.negative || 'N/A'}\n`; // NEW
                 });
             } else {
                  html += '<p class="text-red-600 font-semibold mb-4">Confidence Diary (Page 6) has not been completed.</p>';
@@ -1125,5 +1149,4 @@
 
 </body>
 </html>
-
 
